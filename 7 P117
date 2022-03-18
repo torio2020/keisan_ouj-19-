@@ -1,0 +1,134 @@
+print("a ÷bを計算します")
+a = int(input("aを入力してください: "))
+b = int(input("bを入力してください: "))
+print("商は " + str(int(a/b)))
+print("余りは " + str(a%b))
+実行すると
+a ÷bを計算します
+aを入力してください: 1
+bを入力してください: 0
+...
+エラーメッセージ
+...
+0で割り算は出来ないのでプログラムが正常に実行されないエラーとなってしまう。
+
+そこで条件分岐を使うと
+print("a÷bを計算します")
+a = int(input("aを入力してください: "))
+b = int(input("bを入力してください: "))
+if b==0:
+    print("0では割れません")
+else:
+    print("商は "+ str(int(a/b)))
+    print("余りは "+ str(a%b))
+実行すると
+a÷bを計算します
+aを入力してください: ５
+bを入力してください: ０
+0では割れません
+
+ヘロンの公式を用いて三角形の面積を求めるプログラムも
+三辺の長さa,b,cが三角不等式を満たさなければ三角形を作ることは出来ない
+辺のチェックを加えた三角形の面積を求めるプログラム
+import math
+a = int(input("1つ目の辺の長さを入力してください: "))
+b = int(input("2つ目の辺の長さを入力してください: "))
+c = int(input("3つ目の辺の長さを入力してください: "))
+if a<b+c and b<a+c and c<a+b:
+    s = (a + b + c) / 2
+    print(math.sqrt(s*(s-a)*(s-b)*(s-c)))
+else:
+    print("三角形をつくることが出来ません")
+実行すると
+1つ目の辺の長さを入力してください: 100
+2つ目の辺の長さを入力してください: 4
+3つ目の辺の長さを入力してください: 4
+三角形をつくることが出来ません
+
+(3)九九の表を作る
+1から9の段までを繰り返す
+　　1から9まで繰り返してその段の数とかけ算し、表示する
+  　表示を次の行にする(改行する)
+for y in range(1,10):
+    for x in range(1,10):
+        print (str(x*y) + " ",end="")　表示の最後を改行の代わりに空文字列と指定した
+    print(" ")　　　　　　　　　　　　　xの繰り返しの後に改行のみを表示するためのprin
+実行すると
+1 2 3 4 5 6 7 8 9  
+2 4 6 8 10 12 14 16 18  
+3 6 9 12 15 18 21 24 27  
+4 8 12 16 20 24 28 32 36  
+5 10 15 20 25 30 35 40 45  
+6 12 18 24 30 36 42 48 54  
+7 14 21 28 35 42 49 56 63  
+8 16 24 32 40 48 56 64 72  
+9 18 27 36 45 54 63 72 81  
+
+(4)FizzBuzz問題
+円状に並んだプレイヤーが順に1から数を数えていく
+3の倍数ならば数ではなく"Fizz"
+5の倍数ならば"Buzz"
+3かつ5の倍数ならば"FizzBuzz"と言わなければならない
+for i in range(1,101):
+    if i%3 == 0:
+        print("Fizz")
+    elif i%5 == 0:
+        print("Buzz")
+    elif i%15 == 0:
+        print("FizzBuzz")
+    else:
+        print(i)
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+Fizz　15なのにFizzBuzzじゃない...
+16
+...
+
+正解は
+for i in range(1,101):
+    if i%15 == 0:
+        print("FizzBuzz")
+    elif i%3 == 0:
+        print("Fizz")
+    elif i%5 == 0:
+        print("Buzz")
+    else:
+        print(i)
+別解は
+for i in range(1,101):
+    if i%3 == 0:
+        print("Fizz",end="")　15で割り切れる場合：改行もせず両方表示されるので"FizzBuzz"となる
+    if i&5 == 0:　　　　　　　　　　　
+        print("Buzz",end="")
+    if i%3 != 0 and i%5 != 0:　3でも5でも割り切れないとき
+        print(i)
+    else:　　　　　　　　　　　　改行してないので最後に改行する
+        print("")
+割り算を使わないやり方
+n3 = 3
+n5 = 5
+for i in range(1,101):
+    fizz = ""
+    buzz = ""
+    if i == n3:
+        fizz = "Fizz"
+        n3 = n3 + 3
+    if i == n5:
+        buzz = "Buzz"
+        n5 = n5 + 5
+    if fizz == buzz:
+        print(i)
+    else:
+        print(fizz+buzz)
